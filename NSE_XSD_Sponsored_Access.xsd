@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2021 (x64) (http://www.altova.com) by Olufemi Balogun (The Nigeria Stock Exchange) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" elementFormDefault="qualified" attributeFormDefault="unqualified" vc:minVersion="1.1">
+	<xs:element name="ngx-data">
+		<xs:annotation>
+			<xs:documentation>Comment describing your root element</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice>
+				<xs:element name="sponsoredAccess" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="sponsoredMembers">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="sponsoredMember" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="entityName" type="xs:string"/>
+													<xs:element name="emailAddress" type="xs:string"/>
+													<xs:element name="webSite" type="xs:string"/>
+													<xs:element name="contactPhoneNumbers" type="xs:string"/>
+												</xs:sequence>
+												<xs:attribute name="type" use="required">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:enumeration value="PENSION_FUND_ADMINISTRATION"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:attribute>
+												<xs:attribute name="sponsorAccessMemberCode" type="xs:string" use="required"/>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="sponsoringMembers">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="sponsoringMember" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="sponsoredMembers">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="sponsoredMember" maxOccurs="unbounded">
+																	<xs:complexType>
+																		<xs:attribute name="sponsorAccessMemberCode" type="xs:string" use="required"/>
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+												<xs:attribute name="type" use="required">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:enumeration value="EXCHANGE_BROKER"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:attribute>
+												<xs:attribute name="exchangeMemberCode" type="xs:string" use="required"/>
+												<xs:attribute name="exchangeMemberName" type="xs:string" use="required"/>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
