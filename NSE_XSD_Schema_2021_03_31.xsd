@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2021 rel. 2 (x64) (http://www.altova.com) by Femi Balogun (NGX Limited) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" elementFormDefault="qualified" attributeFormDefault="unqualified" vc:minVersion="1.1">
+	<xs:element name="ngx-data">
+		<xs:annotation>
+			<xs:documentation>Comment describing your root element</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice>
+				<xs:element name="marketData" minOccurs="0">
+					<xs:complexType>
+						<xs:choice>
+							<xs:element name="end-of-day" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence minOccurs="0">
+										<xs:element name="constituent" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:attribute name="securityId" type="xs:string" use="required"/>
+												<xs:attribute name="symbol" type="xs:string" use="required"/>
+												<xs:attribute name="price" type="xs:double" use="required"/>
+												<xs:attribute name="quantityOnIssue" type="xs:integer" use="required"/>
+												<xs:attribute name="cappingFactor" type="xs:double" use="required"/>
+												<xs:attribute name="weight" type="xs:double" use="required"/>
+												<xs:attribute name="modifiedQuantityOnIssue" type="xs:double" use="required"/>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+									<xs:attribute name="symbol" type="xs:string" use="required"/>
+									<xs:attribute name="securiyName" type="xs:string" use="required"/>
+									<xs:attribute name="open" type="xs:double" use="optional"/>
+									<xs:attribute name="high" type="xs:double" use="optional"/>
+									<xs:attribute name="low" type="xs:double" use="optional"/>
+									<xs:attribute name="close" type="xs:double" use="required"/>
+									<xs:attribute name="currentPrice" type="xs:double" use="required"/>
+									<xs:attribute name="quantity" type="xs:integer" use="optional"/>
+									<xs:attribute name="securityType" use="required">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:enumeration value="FUTURES"/>
+												<xs:enumeration value="INDX"/>
+												<xs:enumeration value="EQTY"/>
+												<xs:enumeration value="DEBT"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="corporateActions" minOccurs="0">
+								<xs:complexType>
+									<xs:choice>
+										<xs:element name="dividend" minOccurs="0" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:attribute name="currency" type="xs:string" use="optional" default="NAIRA"/>
+												<xs:attribute name="amount" type="xs:double" use="required"/>
+												<xs:attribute name="securityId" type="xs:string" use="required"/>
+												<xs:attribute name="confirmationDate" type="xs:date" use="required"/>
+												<xs:attribute name="confirmationTime" type="xs:time" use="required"/>
+												<xs:attribute name="exDate" type="xs:date" use="required"/>
+												<xs:attribute name="actionDate" type="xs:date" use="required"/>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="splits" minOccurs="0" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:attribute name="isBonus" type="xs:boolean" use="required"/>
+												<xs:attribute name="securityId" type="xs:string" use="required"/>
+												<xs:attribute name="denominator" type="xs:integer" use="required"/>
+												<xs:attribute name="numerator" type="xs:integer" use="required"/>
+												<xs:attribute name="confirmationDate" type="xs:date" use="required"/>
+												<xs:attribute name="confirmationTime" type="xs:time" use="required"/>
+												<xs:attribute name="exDate" type="xs:date" use="required"/>
+												<xs:attribute name="isin" type="xs:string"/>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="rights" minOccurs="0" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:attribute name="symbol" type="xs:string" use="required"/>
+												<xs:attribute name="securityId" type="xs:string" use="required"/>
+												<xs:attribute name="securityName" type="xs:string" use="required"/>
+												<xs:attribute name="securityType" use="required">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:enumeration value="DEBT"/>
+															<xs:enumeration value="EQTY"/>
+															<xs:enumeration value="ETF"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:attribute>
+												<xs:attribute name="isin" type="xs:string" use="required"/>
+												<xs:attribute name="status" use="required">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:enumeration value="Y"/>
+															<xs:enumeration value="N"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:attribute>
+												<xs:attribute name="issuerName" type="xs:string" use="required"/>
+												<xs:attribute name="boardName" type="xs:string" use="required"/>
+												<xs:attribute name="listingDate" type="xs:string" use="required"/>
+												<xs:attribute name="delistingDate"/>
+												<xs:attribute name="issueDate" type="xs:date" use="required"/>
+												<xs:attribute name="issuePrice" type="xs:float" use="required"/>
+												<xs:attribute name="isTradeAble" use="required">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:enumeration value="Y"/>
+															<xs:enumeration value="N"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:attribute>
+											</xs:complexType>
+										</xs:element>
+									</xs:choice>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="securityList" minOccurs="0">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="security" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="underlyingSecurityId" minOccurs="0" maxOccurs="unbounded"/>
+												</xs:sequence>
+												<xs:attribute name="securityId" type="xs:string" use="required"/>
+												<xs:attribute name="symbol" type="xs:string" use="required"/>
+												<xs:attribute name="securityName" type="xs:string" use="required"/>
+												<xs:attribute name="securityType" use="required">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:enumeration value="INDX"/>
+															<xs:enumeration value="DEBT"/>
+															<xs:enumeration value="EQTY"/>
+															<xs:enumeration value="ETF"/>
+															<xs:enumeration value="FUTURES"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:attribute>
+												<xs:attribute name="isin" type="xs:string" use="required"/>
+												<xs:attribute name="issuerName" type="xs:string" use="required"/>
+												<xs:attribute name="boardName" type="xs:string" use="required"/>
+												<xs:attribute name="listingDate" type="xs:string" use="required"/>
+												<xs:attribute name="delistingDate" type="xs:date" use="optional"/>
+												<xs:attribute name="issueDate" type="xs:date" use="required"/>
+												<xs:attribute name="issuePrice" type="xs:double" use="required"/>
+												<xs:attribute name="isTradeAble" use="required">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:enumeration value="Y"/>
+															<xs:enumeration value="N"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:attribute>
+												<xs:attribute name="muliplier" type="xs:double" use="optional"/>
+												<xs:attribute name="status" use="required">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:enumeration value="Y"/>
+															<xs:enumeration value="N"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:attribute>
+												<xs:attribute name="parentSecurityId" type="xs:string" use="optional"/>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:choice>
+						<xs:attribute name="tradingDate" type="xs:date" use="required"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="configuratons" minOccurs="0">
+					<xs:complexType>
+						<xs:choice>
+							<xs:element name="tradingSession" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="session" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:attribute name="sessionId" type="xs:string" use="required"/>
+												<xs:attribute name="sessionName" type="xs:string" use="required"/>
+												<xs:attribute name="time" type="xs:time" use="required"/>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+									<xs:attribute name="instrumentType" type="xs:string" use="optional"/>
+									<xs:attribute name="instrumentId" type="xs:string" use="optional"/>
+								</xs:complexType>
+							</xs:element>
+						</xs:choice>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="participants" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="clearingMembers" minOccurs="0">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="clearingMember" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:attribute name="clearingMemberCode" use="required">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:maxLength value="15"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:attribute>
+												<xs:attribute name="clearingMemberName" use="required">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:maxLength value="150"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:attribute>
+												<xs:attribute name="clearingMemberType" use="required">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:enumeration value="GCM"/>
+															<xs:enumeration value="SCM"/>
+															<xs:enumeration value="PCM"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:attribute>
+												<xs:attribute name="bankVerificationNumber" type="xs:string" use="optional"/>
+												<xs:attribute name="nationalIdentificationNumber" type="xs:string" use="optional"/>
+												<xs:attribute name="legalIdentificationNumber" type="xs:string" use="optional"/>
+												<xs:attribute name="address" type="xs:string" use="optional"/>
+												<xs:attribute name="city" type="xs:string" use="optional"/>
+												<xs:attribute name="state" type="xs:string" use="optional"/>
+												<xs:attribute name="country" type="xs:string" use="optional"/>
+												<xs:attribute name="contactPhoneNumber" type="xs:string" use="required"/>
+												<xs:attribute name="contactPerson" type="xs:string" use="required"/>
+												<xs:attribute name="contactEmailAddress" type="xs:string" use="required"/>
+												<xs:attribute name="status" use="required">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:enumeration value="A"/>
+															<xs:enumeration value="S"/>
+															<xs:enumeration value="D"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:attribute>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="tradingMembers" minOccurs="0">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="tradingMember" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:attribute name="tradingMemberCode" type="xs:string" use="required"/>
+												<xs:attribute name="tradingMemberName" type="xs:string" use="required"/>
+												<xs:attribute name="bankVerificationNumber" type="xs:string" use="optional"/>
+												<xs:attribute name="natIdentificationNumber" type="xs:string" use="optional"/>
+												<xs:attribute name="legalIdentificationNumber" type="xs:string" use="optional"/>
+												<xs:attribute name="address" type="xs:string" use="optional"/>
+												<xs:attribute name="city" type="xs:time" use="optional"/>
+												<xs:attribute name="state" type="xs:string" use="optional"/>
+												<xs:attribute name="country" type="xs:string" use="optional"/>
+												<xs:attribute name="contactPhoneNumber" type="xs:string" use="required"/>
+												<xs:attribute name="contactPerson" type="xs:string" use="required"/>
+												<xs:attribute name="contactEmailAddress" type="xs:string" use="required"/>
+												<xs:attribute name="status" use="required">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:enumeration value="A"/>
+															<xs:enumeration value="S"/>
+															<xs:enumeration value="D"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:attribute>
+												<xs:attribute name="clearingMemberCode" type="xs:string" use="required"/>
+												<xs:attribute name="isPerson" use="required">
+													<xs:simpleType>
+														<xs:restriction base="xs:boolean"/>
+													</xs:simpleType>
+												</xs:attribute>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="clients" minOccurs="0">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="client" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:attribute name="clientId" type="xs:string" use="required"/>
+												<xs:attribute name="clientName" type="xs:string" use="required"/>
+												<xs:attribute name="clientType" use="required">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:enumeration value="PROP"/>
+															<xs:enumeration value="NORMAL"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:attribute>
+												<xs:attribute name="constitution" use="required">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:enumeration value="IND"/>
+															<xs:enumeration value="PROP"/>
+															<xs:enumeration value="LLP"/>
+															<xs:enumeration value="LLC"/>
+															<xs:enumeration value="PLC"/>
+															<xs:enumeration value="OTHER"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:attribute>
+												<xs:attribute name="bankVerificationNumber" type="xs:string" use="optional"/>
+												<xs:attribute name="natIdentificationNumber" type="xs:string" use="optional"/>
+												<xs:attribute name="legalIdentificationNumber" type="xs:string" use="optional"/>
+												<xs:attribute name="address" type="xs:string" use="optional"/>
+												<xs:attribute name="city" type="xs:string" use="optional"/>
+												<xs:attribute name="state" type="xs:string" use="optional"/>
+												<xs:attribute name="country" type="xs:string" use="optional"/>
+												<xs:attribute name="contactPhoneNumber" type="xs:string" use="required"/>
+												<xs:attribute name="contactEmailAddress" type="xs:string" use="required"/>
+												<xs:attribute name="status" use="required">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:enumeration value="A"/>
+															<xs:enumeration value="S"/>
+															<xs:enumeration value="D"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:attribute>
+												<xs:attribute name="tradingMemberCode" type="xs:string" use="required"/>
+												<xs:attribute name="isPerson" type="xs:boolean" use="required"/>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="appsMessages" minOccurs="0">
+					<xs:complexType>
+						<xs:choice>
+							<xs:element name="errors" minOccurs="0">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="error" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:attribute name="messageSequenceNo" type="xs:integer" use="required"/>
+												<xs:attribute name="schemaCode" type="xs:string" use="required"/>
+												<xs:attribute name="errorCode" type="xs:string" use="required"/>
+												<xs:attribute name="Message" type="xs:string" use="required"/>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:choice>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+			<xs:attribute name="messageDate" type="xs:date" use="required"/>
+			<xs:attribute name="messageTime" type="xs:string" use="required"/>
+			<xs:attribute name="sequenceNo" type="xs:integer" use="required"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
